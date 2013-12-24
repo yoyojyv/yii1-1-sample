@@ -1,0 +1,8 @@
+2013/12/24 10:53:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "gii".' in /Users/yoyojyv/Projects/humuson/research-php-framework/yii1-1-sample/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /Users/yoyojyv/Projects/humuson/research-php-framework/yii1-1-sample/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#1 /Users/yoyojyv/Projects/humuson/research-php-framework/yii1-1-sample/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /Users/yoyojyv/Projects/humuson/research-php-framework/yii1-1-sample/index.php(14): CApplication->run()
+#3 {main}
+REQUEST_URI=/index.php?r=gii
+---
