@@ -99,3 +99,81 @@ array(
 ),
 ```
 
+
+
+### 03. 코드 생성하기
+
+yiiFramework 코드 생성하는 부분이 제공됩니다.
+
+먼저 DB 에 두개의 테이블을 생성하도록 합니다.
+
+
+```
+CREATE TABLE Employee (
+    id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    departmentId TINYINT UNSIGNED NOT NULL
+        COMMENT "CONSTRAINT FOREIGN KEY (departmentId) REFERENCES Department(id)",
+    firstName VARCHAR(20) NOT NULL,
+    lastName VARCHAR(40) NOT NULL,
+    email VARCHAR(60) NOT NULL,
+    ext SMALLINT UNSIGNED NULL,
+    hireDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    leaveDate DATETIME NULL,
+    INDEX name (lastName, firstName),
+    INDEX (departmentId)
+);
+
+CREATE TABLE Department (
+    id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(40),
+    UNIQUE (name)
+);
+```
+
+- 이제 http://local.yii11.com/index.php?r=gii 페이지롤 접근해 봅니다. (code generator 웹 경로)
+
+- 파라메터를 넘기는 부분인 r=gii 부분을 좀 더 예쁘게 표시해주기 위해 /protected/config/main.php 파일을 열어 다음부분의 주석을 풀어줍니다.
+
+```
+'urlManager'=>array(
+  'urlFormat'=>'path',
+  'rules'=>array(
+    '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+    '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+    '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+  ),
+),
+```
+
+- 이제 http://local.yii11.com/index.php/gii 로 접근하면 code generator 페이지를 볼 수 있습니다.
+
+
+Model Generator 링크를 클릭하여 Employee, Department model 을 생성합니다.
+- Table Name 부분에 테이블명을 적습니다.
+- Preview 버튼을 눌러 생성되는 파일을 확인합니다.
+- Generate 버튼을 눌러 코드를 생성합니다.
+
+* 권한이 없는 경우 파일을 쓸수 없다고 나올 것 입니다. 이 경우 /protected 경로의 퍼미션을 조정 후에 다시 코드를 생성해 봅니다.
+
+- /protected/models 디렉토리에 Employee.php, Department.php 파일이 생성 되었는지 확인합니다.
+
+
+
+다음으로 Crud Generator 링크를 클릭하여 코드를 생성합니다.
+
+- Model Class 부분에 Employee, Department 입력하여 코드를 생성합니다.
+- 마찬가지로 Preview 버튼을 누른 후 Generate 버튼을 눌러 코드 생성을 하면 됩니다.
+* Controller ID 부분은 자동으로 소문자로 시작하게 나오는데 이는 그대로 두도록합니다.
+
+
+코드가 잘 생성되었는지 확인을 하기 위해 다음의 페이지들로 이동해 봅니다.
+- http://local.yii11.com/index.php/department
+- http://local.yii11.com/index.php/employee
+
+* view, show, index php 파일이 생성됩니다. (index 는 list 페이지 임)
+
+
+
+
+
+
